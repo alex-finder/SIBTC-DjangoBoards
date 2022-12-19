@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}Start a New Topic{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a></li>
+  <li class="breadcrumb-item active">New topic</li>
+{% endblock %}
+
+{% block content %}
+  <form method="post" novalidate>
+    {% csrf_token %}
+
+    {% for field in form %}
+      <div class="form-group">
+        {{ field.label_tag }}
+
+        {% render_field field class="form-control" %}
+
+<!--
+      The render_field tag is not part of Django; it lives inside the package we installed.
+      To use it we have to pass a form field instance as the first parameter, and then after we can add arbitrary HTML
+      attributes to complement it. It will be useful because then we can assign classes based on certain conditions.
+
+      Some examples of the render_field template tag:
+
+      {% render_field form.subject class="form-control" %}
+      {% render_field form.message class="form-control" placeholder=form.message.label %}
+      {% render_field field class="form-control" placeholder="Write a message!" %}
+      {% render_field field style="font-size: 20px" %}
+-->
+        
+        {% if field.help_text %}
+          <small class="form-text text-muted">
+            {{ field.help_text }}
+          </small>
+        {% endif %}
+      </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-success">Post</button>
+  </form>
+{% endblock %}

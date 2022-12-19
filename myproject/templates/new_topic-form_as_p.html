@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}Start a New Topic{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a></li>
+  <li class="breadcrumb-item active">New topic</li>
+{% endblock %}
+
+{% block content %}
+<!--
+  Browser pre-validation can be disabled by adding a novalidate attribute
+  <form method="post" novalidate>
+-->
+
+  <form method="post">
+
+    {% csrf_token %}
+
+    <!-- The form has three rendering options: form.as_table, form.as_ul, and form.as_p.
+    It’s a quick way to render all the fields of a form. As the name suggests,
+    the as_table uses table tags to format the inputs,
+    the as_ul creates an HTML list of inputs, etc. -->
+
+    <!-- Another important thing to note is that: there is no such a thing as "client-side validation."
+    JavaScript validation or browser validation is just for usability purpose.
+    And also to reduce the number of requests to the server.
+    Data validation should always be done on the server side, where we have full control over the data.-->
+
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-success">Post</button>
+
+  </form>
+{% endblock %}
