@@ -1,0 +1,26 @@
+body {
+    /* background-image: url(../img/regal.webp); */
+    background-image: url(../img/regal.webp);
+}
+/* regal is best */
+/* dust_scratches.webp is ok */
+/* fabric is ok */
+/* full-bloom.webp is nice */
+/* full-bloom.webp is nice, soothing, but a bit distracting */
+/* spring.webp is meh */
+/* stripes is meh */
+
+
+
+.logo {
+    font-family: 'Peralta', cursive;
+}
+
+.logo a {
+    color: rgba(0, 0, 0, .9)
+}
+
+.logo a:hover,
+.logo a:active{
+    text-decoration: none;
+}

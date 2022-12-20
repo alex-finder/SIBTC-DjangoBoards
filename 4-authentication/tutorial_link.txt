@@ -1,4 +1,10 @@
 https://simpleisbetterthancomplex.com/series/2017/09/25/a-complete-beginners-guide-to-django-part-4.html
 
 progress:
-Improving the Tests Layout
+Testing the Template Tags
+
+opportunities for defects:
+    # initial LoginView entered as LogoutView due to copy paste, opportunity for defect :)
+    # path('login/', auth_views.LogoutView.as_view(template_name='login.html'), name='login'),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
