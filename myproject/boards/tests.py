@@ -2,7 +2,6 @@ from django.test import TestCase
 from django.urls import reverse, resolve
 
 from .views import home, board_topics, new_topic
-# new_topic
 from .models import Board, User, Topic, Post
 from .forms import NewTopicForm
 

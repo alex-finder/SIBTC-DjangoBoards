@@ -14,5 +14,9 @@ def signup(request: HttpRequest) -> HttpResponse:
             auth_login(request, user)
             return redirect('home')
     else:
-        form = UserCreationForm()
+        # The initial code was: form = UserCreationForm()
+        # this is causing the unittest to fail
+        # TODO: potential test case training
+        # form = UserCreationForm()
+        form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
