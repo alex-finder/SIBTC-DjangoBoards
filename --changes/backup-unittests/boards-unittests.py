@@ -1,9 +1,10 @@
 from django.test import TestCase
 from django.urls import reverse, resolve
 
-from .views import home, board_topics, new_topic
-from .models import Board, User, Topic, Post
-from .forms import NewTopicForm
+from myproject.boards.views import home, board_topics, new_topic
+# new_topic
+from myproject.boards.models import Board, User, Topic, Post
+from myproject.boards.forms import NewTopicForm
 
 
 class HomeTests(TestCase):
