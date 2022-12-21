@@ -1,0 +1,34 @@
+ In the project root, in the same page where the manage.py script is, run the following command to start a new app:
+	django-admin startapp accounts
+
+/myproject/accounts/admin.py
++from django.contrib import admin
++
++# Register your models here.
+
+include the accounts app to the INSTALLED_APPS in the settings.py file:
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    'widget_tweaks',
+
+    'accounts',
+    'boards',
+]
+
+Added files:
+	myproject/accounts/forms.py
+
+Changed Files:
+/myproject/accounts/apps.py
+/myproject/accounts/models.py
+/myproject/accounts/views.py
+/myproject/myproject/settings.py
+/myproject/myproject/urls.py
+/myproject/templates/base.html
+/myproject/templates/includes/form.html
