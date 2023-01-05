@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpRequest, Http404
+from django.contrib.auth.decorators import login_required
 from .models import Board, Topic, Post
 from .forms import NewTopicForm
 
@@ -45,6 +46,7 @@ def board_topics(request: HttpRequest, pk: int) -> HttpResponse:
 #     return render(request, 'new_topic.html', {'board': board})
 
 
+@login_required
 def new_topic(request: HttpRequest, pk: int) -> HttpResponse:
     board = get_object_or_404(Board, pk=pk)
     user = User.objects.first()
