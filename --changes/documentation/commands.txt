@@ -1,0 +1,66 @@
+URL: https://simpleisbetterthancomplex.com/series/2017/09/04/a-complete-beginners-guide-to-django-part-1.html
+
+To start a new Django project:
+django-admin startproject myproject
+
+Will create the following folder hierarchy:
+
+myproject/                  <-- higher level folder
+ |-- myproject/             <-- django project folder
+ |    |-- myproject/
+ |    |    |-- __init__.py
+ |    |    |-- settings.py
+ |    |    |-- urls.py
+ |    |    |-- wsgi.py
+ |    +-- manage.py
+ +-- venv/                  <-- virtual environment folder
+
+To create our first app, go to the directory where the manage.py file is and executes the following command:
+django-admin startapp boards
+
+This will give us the following directory structure:
+myproject/
+ |-- myproject/
+ |    |-- boards/                <-- our new django app!
+ |    |    |-- migrations/
+ |    |    |    +-- __init__.py
+ |    |    |-- __init__.py
+ |    |    |-- admin.py
+ |    |    |-- apps.py
+ |    |    |-- models.py
+ |    |    |-- tests.py
+ |    |    +-- views.py
+ |    |-- myproject/
+ |    |    |-- __init__.py
+ |    |    |-- settings.py
+ |    |    |-- urls.py
+ |    |    |-- wsgi.py
+ |    +-- manage.py
+ +-- venv/
+
+
+URL: https://simpleisbetterthancomplex.com/series/2017/09/11/a-complete-beginners-guide-to-django-part-2.html
+Use Case Diagram
+Technical analysis document
+StarUML
+Wireframes
+
+To draw your wireframes you can use the draw.io service, it’s free.
+
+Create DB Admin User
+python manage.py createsuperuser
+alexandru.finder / DjangoBoards#10
+
+Django Template Engine Setup
+Create a new folder named templates alongside with the boards and mysite folders:
+myproject/
+ |-- myproject/
+ |    |-- boards/
+ |    |-- myproject/
+ |    |-- templates/   <-- here!
+ |    +-- manage.py
+ +-- venv/
+
+python manage.py test --verbosity=2
+
+In the project root directory, alongside with the boards, templates, and myproject folders, create a new folder named static, and within the static folder create another one named css:
