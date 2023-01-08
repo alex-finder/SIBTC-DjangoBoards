@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpRequest, Http404
 from django.contrib.auth.decorators import login_required
 
-from .forms import NewTopicForm
+from .forms import NewTopicForm, PostForm
 from .models import Board, Topic, Post
 
 
@@ -65,7 +65,10 @@ def new_topic(request: HttpRequest, pk: int) -> HttpResponse:
                 topic=topic,
                 created_by=request.user
             )
-            return redirect('board_topics', pk=board.pk)  # TODO: redirect to the created topic page
+
+            # TODO: potential_defect: redirect to board_topics instead of topic_posts
+            # return redirect('board_topics', pk=board.pk)
+            return redirect('topic_posts', pk=pk, topic_pk=topic.pk)
     else:
         form = NewTopicForm()
     return render(request, 'new_topic.html', {'board': board, 'form': form})
@@ -83,3 +86,21 @@ def new_topic(request: HttpRequest, pk: int) -> HttpResponse:
 def topic_posts(request: HttpRequest, pk: int, topic_pk: int):
     topic = get_object_or_404(Topic, board__pk=pk, pk=topic_pk)
     return render(request, 'topic_posts.html', {'topic': topic})
+
+
+def reply_topic(request: HttpRequest, pk: int, topic_pk: int):
+    topic = get_object_or_404(Topic, board__pk=pk, pk=topic_pk)
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            # TODO: Potential defect: remove commit=False from line below
+            post = form.save(commit=False)
+            post.topic = topic
+            post.created_by = request.user
+            post.save()
+            return redirect('topic_posts', pk=pk, topic_pk=topic_pk)
+
+    # TODO: Potential defect: indent the 'else' from below
+    else:
+        form = PostForm()
+    return render(request, 'reply_topic.html', {'topic': topic, 'form': form})
