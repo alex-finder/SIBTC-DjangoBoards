@@ -21,6 +21,7 @@ def board_topics(request: HttpRequest, pk: int) -> HttpResponse:
     board = get_object_or_404(Board, pk=pk)
     return render(request, 'topics.html', {'board': board})
 
+
 # def new_topic_invalid(request: HttpRequest, pk: int) -> HttpResponse:
 #     """
 #     This view is only considering the happy path, which is receiving the data and saving it into the database.
@@ -78,3 +79,7 @@ def new_topic(request: HttpRequest, pk: int) -> HttpResponse:
     #     form = NewTopicForm()
     # return render(request, 'new_topic.html', {'form': form})
 
+
+def topic_posts(request: HttpRequest, pk: int, topic_pk: int):
+    topic = get_object_or_404(Topic, board__pk=pk, pk=topic_pk)
+    return render(request, 'topic_posts.html', {'topic': topic})
