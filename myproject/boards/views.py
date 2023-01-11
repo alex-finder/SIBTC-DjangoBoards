@@ -68,6 +68,12 @@ def new_topic(request: HttpRequest, pk: int) -> HttpResponse:
 
             # TODO: potential_defect: redirect to board_topics instead of topic_posts
             # return redirect('board_topics', pk=board.pk)
+            """  
+            Very important: in the view reply_topic we are using topic_pk because we are referring to 
+            the keyword argument of the function, in the view new_topic we are using topic.pk because a topic 
+            is an object (Topic model instance) and .pk we are accessing the pk property of the Topic model instance. 
+            Small detail, big difference.
+            """
             return redirect('topic_posts', pk=pk, topic_pk=topic.pk)
     else:
         form = NewTopicForm()
