@@ -24,6 +24,8 @@
       </tr>
     </thead>
     <tbody>
+
+      <!-- #TODO: possible_defect: Unordered by last_updated
       {% for topic in board.topics.all %}
         <tr>
           <td><a href="{% url 'topic_posts' board.pk topic.pk %}">{{ topic.subject }}</a></td>
@@ -33,6 +35,19 @@
           <td>{{ topic.last_updated }}</td>
         </tr>
       {% endfor %}
+      -->
+
+      <!-- TODO: fix for defect: add ordering by last_updated     -->
+      {% for topic in topics %}
+      <tr>
+        <td><a href="{% url 'topic_posts' board.pk topic.pk %}">{{ topic.subject }}</a></td>
+        <td>{{ topic.starter.username }}</td>
+        <td>{{ topic.replies }}</td>
+        <td>{{ topic.views }}</td>
+        <td>{{ topic.last_updated }}</td>
+      </tr>
+    {% endfor %}
+
     </tbody>
   </table>
 {% endblock %}

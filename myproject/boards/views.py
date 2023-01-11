@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpRequest, Http404
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 
 from .forms import NewTopicForm, PostForm
 from .models import Board, Topic, Post
@@ -18,9 +19,12 @@ def board_topics(request: HttpRequest, pk: int) -> HttpResponse:
     # board = Board.objects.get(pk=pk)
     # except Board.DoesNotExist:
     #     raise Http404
-    board = get_object_or_404(Board, pk=pk)
-    return render(request, 'topics.html', {'board': board})
 
+    # board = get_object_or_404(Board, pk=pk)
+    # return render(request, 'topics.html', {'board': board})
+    board = get_object_or_404(Board, pk=pk)
+    topics = board.topics.order_by('-last_updated').annotate(replies=Count('posts') - 1)
+    return render(request, 'topics.html', {'board': board, 'topics': topics})
 
 # def new_topic_invalid(request: HttpRequest, pk: int) -> HttpResponse:
 #     """
@@ -91,6 +95,8 @@ def new_topic(request: HttpRequest, pk: int) -> HttpResponse:
 
 def topic_posts(request: HttpRequest, pk: int, topic_pk: int):
     topic = get_object_or_404(Topic, board__pk=pk, pk=topic_pk)
+    topic.views += 1
+    topic.save()
     return render(request, 'topic_posts.html', {'topic': topic})
 
 
