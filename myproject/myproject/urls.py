@@ -32,6 +32,15 @@ urlpatterns = [
     path('boards/<int:pk>/new/', views.new_topic, name='new_topic'),
     path('admin/', admin.site.urls),
 
+    # Topics Paths
+    re_path(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/$', views.topic_posts, name='topic_posts'),
+    # TODO: test alternative path for above
+    # path('boards/<int:pk>/topics/<int:topic_pk>/', views.topic_posts, name='topic_posts'),
+
+    re_path(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/reply/$', views.reply_topic, name='reply_topic'),
+    # TODO: test alternative path for above
+    # path(r'boards/<int:pk>/topics/<int:topic_pk>/reply/', views.reply_topic, name='reply_topic'),
+
     # Password Reset paths
     re_path(r'^reset/$',
             auth_views.PasswordResetView.as_view(

@@ -1,0 +1,12 @@
+1) login
+first flow:
+    invalid login - no error message / incorrect login
+    redirect errors
+    topics page accessible without login
+
+
+second flow:
+    valid login does not work
+
+Adding topics:
+    leave auth requirements specifically vague so that it would start a conversation
