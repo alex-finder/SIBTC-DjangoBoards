@@ -16,7 +16,7 @@ def signup(request: HttpRequest) -> HttpResponse:
     else:
         # The initial code was: form = UserCreationForm()
         # this is causing the unittest to fail
-        # TODO: potential test case training
+        # TODO: potential defect: UserCreationForm() instead of SignupForm()
         # form = UserCreationForm()
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
